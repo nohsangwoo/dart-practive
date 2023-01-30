@@ -86,16 +86,25 @@ void main(List<String> arguments) {
   Set<int> numbers4 = {1, 2, 3, 4, 5};
   // 중복되는 값은 무시함.
   numbers4.add(3);
-  print("#sets");
+  print("# sets");
   print(numbers4);
 
   print("# functions");
   print(sayHello2("sangwoo"));
   print(sayHelloSanmeas2("sangwoo"));
   print(plus(1, 2));
+
+  print(" # function - named parameter");
+  // not recommended way
+  print(sayHelloWithData("sangwoo", 33, "Republic of Korea"));
+  print(sayHelloWithDataUseByNamedParameter(
+      name: "sangwoo", age: 33, country: "Republic of Korea"));
+
+  print(sayHelloWithDataUseByNamedParameterWithoutDefaultValue(
+      name: "sangwoo", age: 33, country: "Republic of Korea"));
 }
 
-// typescript랑 비슷함
+// # functions.. typescript랑 비슷함
 // 반환타입 지정, 파라미터 타입지정
 void sayHello(String name) {
   print("Hello $name nice to meet you!");
@@ -109,3 +118,29 @@ String sayHello2(String name) {
 String sayHelloSanmeas2(String name) => "Hello $name nice to meet you!";
 
 num plus(num a, num b) => a + b;
+
+// # function - named parameter
+// not recommended way
+String sayHelloWithData(String name, int age, String country) {
+  return "Hello $name, you ar $age, and you come from $country";
+}
+
+// Use this method instead.
+// 이때 deafault value를 사용하여 null safety에 걸리지 않도록 한다.
+String sayHelloWithDataUseByNamedParameter({
+  String name = "anon",
+  int age = 99,
+  String country = "wakanda",
+}) {
+  return "Hello $name, you ar $age, and you come from $country";
+}
+
+// 이때 deafault value를 사용하지 않고 꼭 존재하는 데이터를 전달 받아야 할때
+// 이러면 함수를 호출할때 반드시 인자를 제대로 기입하라고 컴플레인을 건다.
+String sayHelloWithDataUseByNamedParameterWithoutDefaultValue({
+  required String name,
+  required int age,
+  required String country,
+}) {
+  return "Hello $name, you ar $age, and you come from $country";
+}
