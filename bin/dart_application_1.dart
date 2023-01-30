@@ -102,6 +102,9 @@ void main(List<String> arguments) {
 
   print(sayHelloWithDataUseByNamedParameterWithoutDefaultValue(
       name: "sangwoo", age: 33, country: "Republic of Korea"));
+
+  print("# optional positional parameters");
+  print(optionalPositionalParameter("sangwoo", 33));
 }
 
 // # functions.. typescript랑 비슷함
@@ -143,4 +146,9 @@ String sayHelloWithDataUseByNamedParameterWithoutDefaultValue({
   required String country,
 }) {
   return "Hello $name, you ar $age, and you come from $country";
+}
+
+String optionalPositionalParameter(String name, int age,
+    [String? country = "cuba"]) {
+  return "Hello $name, you ar $age yaers old from $country";
 }
