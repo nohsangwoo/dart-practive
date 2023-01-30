@@ -105,6 +105,18 @@ void main(List<String> arguments) {
 
   print("# optional positional parameters");
   print(optionalPositionalParameter("sangwoo", 33));
+
+  print("# QQ Operator");
+  calpitalizeName("sangwoo");
+  calpitalizeName(null);
+  String? text2;
+  // text2가 null이라면 "sangwoo"를 대입하여라
+  text2 ??= "sangwoo";
+
+  text2 = null;
+  // null값이 아니면 에러난다.
+  text2 ??= "another";
+  print(text2);
 }
 
 // # functions.. typescript랑 비슷함
@@ -152,3 +164,6 @@ String optionalPositionalParameter(String name, int age,
     [String? country = "cuba"]) {
   return "Hello $name, you ar $age yaers old from $country";
 }
+
+// javascript nullish랑 비슷
+String calpitalizeName(String? name) => name?.toUpperCase() ?? "ANON";
