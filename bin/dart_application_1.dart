@@ -274,7 +274,8 @@ enum Team { red, blue, redblue, foss, free }
 
 enum XPLevel { beginner, medium, pro }
 
-class Player {
+// Human 이 abstract class이기때문에 Human의 요소를 꼭 override하여 구현해줘야한다.
+class Player extends Human {
   // *final 변경 불가능한 상수로 만든다
   late final String name;
   // late int xp, age; // xp와 age를 int형으로 한번에 선언하기
@@ -319,4 +320,21 @@ class Player {
     // method 안에서 this 사용은 권고되지 않고 할 필요도 없다.
     // print("Hi My name is ${this.name}");
   }
+
+  // abstract class든 뭐든 override할때는 아래와같이 ovverride annotation을 사용해야한다(이곳에선 annotation라고 부르는 듯)
+  @override
+  void walk() {
+    print("walk!");
+  }
+}
+
+class Coach extends Human {
+  @override
+  void walk() {
+    print("slow walker~");
+  }
+}
+
+abstract class Human {
+  void walk();
 }
