@@ -203,23 +203,23 @@ void main(List<String> arguments) {
   var apiData = [
     {
       "name": "sangwoo",
-      "team": "red",
-      "xp": 0,
+      "team": Team.red,
+      "xp": XPLevel.beginner,
     },
     {
       "name": "miya",
-      "team": "red",
-      "xp": 0,
+      "team": Team.red,
+      "xp": XPLevel.beginner,
     },
     {
       "name": "jongran",
-      "team": "red",
-      "xp": 0,
+      "team": Team.red,
+      "xp": XPLevel.beginner,
     },
     {
       "name": "kisik",
-      "team": "red",
-      "xp": 0,
+      "team": Team.red,
+      "xp": XPLevel.beginner,
     },
   ];
 
@@ -267,6 +267,10 @@ void main(List<String> arguments) {
     ..xp = XPLevel.pro
     ..team = Team.redblue
     ..sayHello();
+
+  var sssPlayer = SPlayer(team: Team.red, name: "saaangwooo~");
+  print(" # inheritance");
+  sssPlayer.sayHello();
 }
 
 // usage of enum
@@ -277,7 +281,8 @@ enum XPLevel { beginner, medium, pro }
 // Human 이 abstract class이기때문에 Human의 요소를 꼭 override하여 구현해줘야한다.
 class Player extends Human {
   // *final 변경 불가능한 상수로 만든다
-  late final String name;
+  // late final String name;
+  late String name;
   // late int xp, age; // xp와 age를 int형으로 한번에 선언하기
   late int age, testFor; // testFor와 age를 int형으로 한번에 선언하기
   late XPLevel xp;
@@ -337,4 +342,35 @@ class Coach extends Human {
 
 abstract class Human {
   void walk();
+}
+
+class HumanForInheritance {
+  final String name;
+  HumanForInheritance({
+    required this.name,
+  });
+  void sayHello() {
+    print("Hi my name is $name in Human for inheritance");
+  }
+}
+
+class SPlayer extends HumanForInheritance {
+  final Team team;
+
+  /* SPlayer({
+    required this.team,
+    required String name,
+  }) : super(name: name); */
+  // 위처럼 선언하던가 아래처럼 선언하던가 부모생성자를 호출하는 방식.
+  // super는 기본적으로 부모와 통신하는 장치.
+  SPlayer({
+    required this.team,
+    required super.name,
+  });
+
+  @override
+  void sayHello() {
+    super.sayHello();
+    print("Hi my name is $name, and the my team is $team");
+  }
 }
