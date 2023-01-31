@@ -179,15 +179,15 @@ void main(List<String> arguments) {
   print(" # dart class");
   var cPlayer = Player(
     name: "sangwoo",
-    team: "foss",
-    xp: 1500,
+    team: Team.foss,
+    xp: XPLevel.medium,
     age: 33,
   ); // == new Player()
   cPlayer.sayHello();
   var bPlayer = Player(
     name: "miya",
-    team: "free",
-    xp: 2000,
+    team: Team.free,
+    xp: XPLevel.medium,
     age: 21,
   ); // == new Player()
   bPlayer.sayHello();
@@ -255,24 +255,32 @@ void main(List<String> arguments) {
     sangwoo.team = "blue"; */
 
   // 위 문법과 동일하다.
-  var sangwoo = Player(name: "sangwoo", team: "red", xp: 1200, age: 33)
-    ..name = "noh"
-    ..xp = 1200000
-    ..team = "blue";
+  var sangwoo =
+      Player(name: "sangwoo", team: Team.red, xp: XPLevel.medium, age: 33)
+        ..name = "noh"
+        ..xp = XPLevel.medium
+        ..team = Team.blue;
 
   // 또는 나중에 변경할 수도 있다.
   var miya = sangwoo
     ..name = "miya"
-    ..xp = 300000000
-    ..team = "redblue"
+    ..xp = XPLevel.pro
+    ..team = Team.redblue
     ..sayHello();
 }
+
+// usage of enum
+enum Team { red, blue, redblue, foss, free }
+
+enum XPLevel { beginner, medium, pro }
 
 class Player {
   // *final 변경 불가능한 상수로 만든다
   late final String name;
-  late int xp, age; // xp와 age를 int형으로 한번에 선언하기
-  late String team;
+  // late int xp, age; // xp와 age를 int형으로 한번에 선언하기
+  late int age, testFor; // testFor와 age를 int형으로 한번에 선언하기
+  late XPLevel xp;
+  late Team team;
 
   // constructor(생성자)
   // named constructor parametor(객체 형식으로 받는것처럼...)
@@ -291,15 +299,15 @@ class Player {
     required int age,
   })  : this.age = age,
         this.name = name,
-        this.team = "blue",
-        this.xp = 0;
+        this.team = Team.blue,
+        this.xp = XPLevel.beginner;
 
   // change into this pattern
   Player.createRedPlayer({
     required this.name,
     required this.age,
-  })  : team = "red",
-        xp = 0;
+  })  : team = Team.red,
+        xp = XPLevel.beginner;
 
   Player.fromJson(Map<String, dynamic> playerJson)
       : name = playerJson["name"],
