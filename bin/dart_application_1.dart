@@ -191,14 +191,19 @@ void main(List<String> arguments) {
     age: 21,
   ); // == new Player()
   bPlayer.sayHello();
+
+  // using named constructor
+  var dBluePlayer = Player.createBluePlayer(name: "nico", age: 21);
+  var dRedPlayer = Player.createRedPlayer(name: "nico", age: 21);
+  dBluePlayer.sayHello();
+  dRedPlayer.sayHello();
 }
 
 class Player {
   // *final 변경 불가능한 상수로 만든다
   late final String name;
-  late int xp;
+  late int xp, age; // xp와 age를 int형으로 한번에 선언하기
   late String team;
-  late int age;
 
   // constructor(생성자)
   // named constructor parametor(객체 형식으로 받는것처럼...)
@@ -208,8 +213,28 @@ class Player {
     required this.xp,
     required this.age,
   });
+
+  // Named Constructor
+  // 특정조건의 생성자를 따로 만들어주고 싶을때 사용한다.
+  // 콜론(:)을 사용하여 Player의 객체를 초기화하겠다고 선언하는 방법.
+  Player.createBluePlayer({
+    required String name,
+    required int age,
+  })  : this.age = age,
+        this.name = name,
+        this.team = "blue",
+        this.xp = 0;
+
+  Player.createRedPlayer({
+    required String name,
+    required int age,
+  })  : this.age = age,
+        this.name = name,
+        this.team = "red",
+        this.xp = 0;
+
   sayHello() {
-    print("Hi My name is $name");
+    print("Hi My name is $name, the team name is $team and xp is $xp");
     // method 안에서 this 사용은 권고되지 않고 할 필요도 없다.
     // print("Hi My name is ${this.name}");
   }
