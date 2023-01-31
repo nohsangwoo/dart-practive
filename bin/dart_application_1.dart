@@ -177,17 +177,19 @@ void main(List<String> arguments) {
   print(reverseListOfNumbers([1, 2, 3, 4]));
 
   print(" # dart class");
-  var cPlayer = Player(); // == new Player()
-  print(cPlayer.name);
-  // cPlayer.name = "lalalalala";
-  print(cPlayer.name);
+  var cPlayer = Player("sangwoo", 1500); // == new Player()
   cPlayer.sayHello();
+  var bPlayer = Player("miya", 2000); // == new Player()
+  bPlayer.sayHello();
 }
 
 class Player {
   // *final 변경 불가능한 상수로 만든다
-  final String name = "class sangwoo";
-  int xp = 1500;
+  late final String name;
+  late int xp;
+
+  // constructor(생성자)
+  Player(this.name, this.xp);
   sayHello() {
     print("Hi My name is $name");
     // method 안에서 this 사용은 권고되지 않고 할 필요도 없다.
