@@ -197,6 +197,56 @@ void main(List<String> arguments) {
   var dRedPlayer = Player.createRedPlayer(name: "nico", age: 21);
   dBluePlayer.sayHello();
   dRedPlayer.sayHello();
+
+  // # Api로부터 데이터를 받아서 class로 변환 하는 방법
+  // data mocking
+  var apiData = [
+    {
+      "name": "sangwoo",
+      "team": "red",
+      "xp": 0,
+    },
+    {
+      "name": "miya",
+      "team": "red",
+      "xp": 0,
+    },
+    {
+      "name": "jongran",
+      "team": "red",
+      "xp": 0,
+    },
+    {
+      "name": "kisik",
+      "team": "red",
+      "xp": 0,
+    },
+  ];
+
+  print(" # named constructor practice");
+  void setJson(Map<String, Object> playerJson) {
+    var ePlayer = Player.fromJson(playerJson);
+    ePlayer.sayHello();
+  }
+
+ /*  apiData.forEach((playerJson) {
+    var ePlayer = Player.fromJson(playerJson);
+    ePlayer.sayHello();
+  }); */
+
+  apiData.forEach(setJson);
+
+  // named constructor 다른 패턴(forEach안에 들어가는 내용은 메소드로 뽑아준다)
+  final numbers = <int>[1, 2, 6, 7];
+/*   numbers.forEach((el) {
+    print(el);
+  }); */
+
+  void printNum(int number) {
+    print(number);
+  }
+
+  numbers.forEach(printNum);
 }
 
 class Player {
@@ -225,13 +275,17 @@ class Player {
         this.team = "blue",
         this.xp = 0;
 
+  // change into this pattern
   Player.createRedPlayer({
-    required String name,
-    required int age,
-  })  : this.age = age,
-        this.name = name,
-        this.team = "red",
-        this.xp = 0;
+    required this.name,
+    required this.age,
+  })  : team = "red",
+        xp = 0;
+
+  Player.fromJson(Map<String, dynamic> playerJson)
+      : name = playerJson["name"],
+        team = playerJson["team"],
+        xp = playerJson["xp"];
 
   sayHello() {
     print("Hi My name is $name, the team name is $team and xp is $xp");
