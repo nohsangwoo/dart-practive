@@ -229,7 +229,7 @@ void main(List<String> arguments) {
     ePlayer.sayHello();
   }
 
- /*  apiData.forEach((playerJson) {
+  /*  apiData.forEach((playerJson) {
     var ePlayer = Player.fromJson(playerJson);
     ePlayer.sayHello();
   }); */
@@ -247,6 +247,25 @@ void main(List<String> arguments) {
   }
 
   numbers.forEach(printNum);
+
+  // Cascade Notation
+  /* var sangwoo = Player(name: "sangwoo", team: "red", xp: 1200, age: 33);
+    sangwoo.name = "noh";
+    sangwoo.xp = 1200000;
+    sangwoo.team = "blue"; */
+
+  // 위 문법과 동일하다.
+  var sangwoo = Player(name: "sangwoo", team: "red", xp: 1200, age: 33)
+    ..name = "noh"
+    ..xp = 1200000
+    ..team = "blue";
+
+  // 또는 나중에 변경할 수도 있다.
+  var miya = sangwoo
+    ..name = "miya"
+    ..xp = 300000000
+    ..team = "redblue"
+    ..sayHello();
 }
 
 class Player {
