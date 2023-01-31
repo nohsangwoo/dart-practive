@@ -177,9 +177,19 @@ void main(List<String> arguments) {
   print(reverseListOfNumbers([1, 2, 3, 4]));
 
   print(" # dart class");
-  var cPlayer = Player("sangwoo", 1500); // == new Player()
+  var cPlayer = Player(
+    name: "sangwoo",
+    team: "foss",
+    xp: 1500,
+    age: 33,
+  ); // == new Player()
   cPlayer.sayHello();
-  var bPlayer = Player("miya", 2000); // == new Player()
+  var bPlayer = Player(
+    name: "miya",
+    team: "free",
+    xp: 2000,
+    age: 21,
+  ); // == new Player()
   bPlayer.sayHello();
 }
 
@@ -187,9 +197,17 @@ class Player {
   // *final 변경 불가능한 상수로 만든다
   late final String name;
   late int xp;
+  late String team;
+  late int age;
 
   // constructor(생성자)
-  Player(this.name, this.xp);
+  // named constructor parametor(객체 형식으로 받는것처럼...)
+  Player({
+    required this.name,
+    required this.team,
+    required this.xp,
+    required this.age,
+  });
   sayHello() {
     print("Hi My name is $name");
     // method 안에서 this 사용은 권고되지 않고 할 필요도 없다.
