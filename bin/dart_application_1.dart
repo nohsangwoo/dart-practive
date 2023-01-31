@@ -271,7 +271,40 @@ void main(List<String> arguments) {
   var sssPlayer = SPlayer(team: Team.red, name: "saaangwooo~");
   print(" # inheritance");
   sssPlayer.sayHello();
+
+  // # Mixins
+  // 생성자가 없는 class를 뜻한다.
+  print("Mixins practice!");
+  var cMixinsPlayer = MixinsPlayer();
+  cMixinsPlayer.runQuick();
+  print(cMixinsPlayer.height);
+  print(cMixinsPlayer.strengthLevel);
 }
+
+// ------------------------ end of main -------------------------
+
+class Strong {
+  final double strengthLevel = 1500.99;
+}
+
+class QuickRunner {
+  void runQuick() {
+    print("runnnnnnn!");
+  }
+}
+
+class Tall {
+  final double height = 1.99;
+}
+
+// # Mixin practice
+// with 다른 클래스의 프로퍼티와 메소드를 그냥 가져오기 위해 사용(상속과는 다름)
+class MixinsPlayer with Strong, QuickRunner, Tall {}
+
+class MixinsHorse with Strong, QuickRunner {}
+
+class MixinsKid with QuickRunner {}
+// end of Mixin practice
 
 // usage of enum
 enum Team { red, blue, redblue, foss, free }
