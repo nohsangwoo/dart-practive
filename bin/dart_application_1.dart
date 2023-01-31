@@ -1,6 +1,73 @@
 import 'package:dart_application_1/dart_application_1.dart'
     as dart_application_1;
 
+// # functions.. typescript랑 비슷함
+// 반환타입 지정, 파라미터 타입지정
+void sayHello(String name) {
+  print("Hello $name nice to meet you!");
+}
+
+String sayHello2(String name) {
+  return "Hello $name nice to meet you!";
+}
+
+// fat arrow syntax
+String sayHelloSanmeas2(String name) => "Hello $name nice to meet you!";
+
+num plus(num a, num b) => a + b;
+
+// # function - named parameter
+// not recommended way
+String sayHelloWithData(String name, int age, String country) {
+  return "Hello $name, you ar $age, and you come from $country";
+}
+
+// Use this method instead.
+// 이때 deafault value를 사용하여 null safety에 걸리지 않도록 한다.
+String sayHelloWithDataUseByNamedParameter({
+  String name = "anon",
+  int age = 99,
+  String country = "wakanda",
+}) {
+  return "Hello $name, you ar $age, and you come from $country";
+}
+
+// 이때 deafault value를 사용하지 않고 꼭 존재하는 데이터를 전달 받아야 할때
+// 이러면 함수를 호출할때 반드시 인자를 제대로 기입하라고 컴플레인을 건다.
+String sayHelloWithDataUseByNamedParameterWithoutDefaultValue({
+  required String name,
+  required int age,
+  required String country,
+}) {
+  return "Hello $name, you ar $age, and you come from $country";
+}
+
+String optionalPositionalParameter(String name, int age,
+    [String? country = "cuba"]) {
+  return "Hello $name, you ar $age yaers old from $country";
+}
+
+// javascript nullish랑 비슷
+String calpitalizeName(String? name) => name?.toUpperCase() ?? "ANON";
+
+// # TypeDef
+// typescript랑 비슷함
+typedef ListOfInts = List<int>;
+ListOfInts reverseListOfNumbers(ListOfInts list) {
+  var reversed = list.reversed;
+  print(reversed);
+  // reversed를 실행시키면 조금 다른 iterable이 되기때문에 다시 list로 변환해줘야 한다.
+  return reversed.toList();
+}
+
+typedef UserInfo = Map<String, String>;
+
+// String sayHi2(Map<String, String> userInfo) {
+String sayHi2(UserInfo userInfo) {
+  return "hi ${userInfo['name']}";
+}
+
+// -------- # main function --------
 void main(List<String> arguments) {
   print('Hello world: ${dart_application_1.calculate()}!');
 
@@ -11,20 +78,8 @@ void main(List<String> arguments) {
   double money = 1345834580829348.131;
 
   // list
-  var numbers1 = [
-    1,
-    2,
-    3,
-    4,
-    5,
-  ];
-  List<int> nums1 = [
-    1,
-    2,
-    3,
-    4,
-    5,
-  ];
+  var numbers1 = [1, 2, 3, 4, 5];
+  List<int> nums1 = [1, 2, 3, 4, 5];
   nums1.add(1);
   print(nums1);
 
@@ -117,53 +172,25 @@ void main(List<String> arguments) {
   // null값이 아니면 에러난다.
   text2 ??= "another";
   print(text2);
+
+  print("# Typedef");
+  print(reverseListOfNumbers([1, 2, 3, 4]));
+
+  print(" # dart class");
+  var cPlayer = Player(); // == new Player()
+  print(cPlayer.name);
+  // cPlayer.name = "lalalalala";
+  print(cPlayer.name);
+  cPlayer.sayHello();
 }
 
-// # functions.. typescript랑 비슷함
-// 반환타입 지정, 파라미터 타입지정
-void sayHello(String name) {
-  print("Hello $name nice to meet you!");
+class Player {
+  // *final 변경 불가능한 상수로 만든다
+  final String name = "class sangwoo";
+  int xp = 1500;
+  sayHello() {
+    print("Hi My name is $name");
+    // method 안에서 this 사용은 권고되지 않고 할 필요도 없다.
+    // print("Hi My name is ${this.name}");
+  }
 }
-
-String sayHello2(String name) {
-  return "Hello $name nice to meet you!";
-}
-
-// fat arrow syntax
-String sayHelloSanmeas2(String name) => "Hello $name nice to meet you!";
-
-num plus(num a, num b) => a + b;
-
-// # function - named parameter
-// not recommended way
-String sayHelloWithData(String name, int age, String country) {
-  return "Hello $name, you ar $age, and you come from $country";
-}
-
-// Use this method instead.
-// 이때 deafault value를 사용하여 null safety에 걸리지 않도록 한다.
-String sayHelloWithDataUseByNamedParameter({
-  String name = "anon",
-  int age = 99,
-  String country = "wakanda",
-}) {
-  return "Hello $name, you ar $age, and you come from $country";
-}
-
-// 이때 deafault value를 사용하지 않고 꼭 존재하는 데이터를 전달 받아야 할때
-// 이러면 함수를 호출할때 반드시 인자를 제대로 기입하라고 컴플레인을 건다.
-String sayHelloWithDataUseByNamedParameterWithoutDefaultValue({
-  required String name,
-  required int age,
-  required String country,
-}) {
-  return "Hello $name, you ar $age, and you come from $country";
-}
-
-String optionalPositionalParameter(String name, int age,
-    [String? country = "cuba"]) {
-  return "Hello $name, you ar $age yaers old from $country";
-}
-
-// javascript nullish랑 비슷
-String calpitalizeName(String? name) => name?.toUpperCase() ?? "ANON";
