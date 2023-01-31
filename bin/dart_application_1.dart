@@ -283,6 +283,7 @@ void main(List<String> arguments) {
 
 // ------------------------ end of main -------------------------
 
+// Mixin의 대상이 되는 클래스는 생성자가 존재하면 안된다.
 class Strong {
   final double strengthLevel = 1500.99;
 }
